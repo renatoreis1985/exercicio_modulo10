@@ -3,11 +3,19 @@ $(document).ready(function () {
         autoplay: true
     })
 
-    $('.menu-hamburguer').click(function () {
-        $('nav').slideToggle();
-    })
-
-    $('#telefone').mask('(00) 00000-0000')
+    $(document).ready(function() {
+        $('#telefone').mask('(00) 0000-0000');
+        $('#cep').mask('00000-000');
+        $('#cpf').mask('000.000.000-00', {reverse: true});
+        $('#endereco').mask('A', {
+            translation: {
+                'A': {
+                    pattern: /[a-zA-Z0-9À-ú\s\-,.]/,
+                    recursive: true
+    }
+}
+    });
+})
 
     $('form').validate({
         rules: {
@@ -34,17 +42,17 @@ $(document).ready(function () {
         messages: {
             nome: 'Por favor, insira o seu nome'
         },
-        submitHandler: function(form) {
+        submitHandler: function (form) {
             alert("Sua requisição foi enviada para análise, parabéns pela aquisição!");
-        form.reset();
+            form.reset();
             console.log(form)
         },
-        invalidHandler: function(evento, validador) {
+        invalidHandler: function (evento, validador) {
             alert("Por favor, preencha os campos para prosseguir com a compra!");
-            }
+        }
     })
 
-    $('.lista-veiculos button').click(function() {
+    $('.lista-veiculos button').click(function () {
         const destino = $('#contato');
         const nomeVeiculo = $(this).parent().find('h3').text();
 
